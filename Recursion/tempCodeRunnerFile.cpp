@@ -1,0 +1,1 @@
+ cout << palindrome(str, 0, n - 1);

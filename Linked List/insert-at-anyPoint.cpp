@@ -38,7 +38,8 @@ Node* insertAtPosition(Node* head, int position, int value) {
     Node* temp = head;
 
     // Move to the node before the required position
-    for (int i = 1; i < position - 1 && temp != NULL; i++) {
+    position--;
+    while(position--) {
         temp = temp->next;
     }
 

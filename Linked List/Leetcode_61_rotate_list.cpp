@@ -94,7 +94,7 @@ void printList(Node* head)
 // Time  : O(n * k)
 // Space : O(1)
 //
-// This was your first working approach.
+// This was my first working approach.
 // ============================================================
 
 Node* rotateRepeated(Node* head, int k)

@@ -46,7 +46,7 @@ public:
             {
                 tail->next = head1;
                 head1 = head1->next;
-            }
+            } 
             else
             {
                 tail->next = head2;

@@ -1,62 +1,113 @@
-// # Make Array Beautiful
+/*
+===========================================================
+Problem: Make Array Beautiful
 
-// ## Problem
+Platform: GeeksforGeeks (GFG)
+Topic: Stack
 
-// Given an array of negative and non-negative integers, make the array beautiful.
+-----------------------------------------------------------
+Problem Statement:
+Given an array of negative and non-negative integers, make
+the array beautiful.
 
-// An array is beautiful if every pair of adjacent integers has the same sign.
+An array is beautiful if every pair of adjacent integers has
+the same sign.
 
-// You can perform the following operation any number of times:
+Allowed operation (any number of times):
+* If two adjacent integers have different signs, remove both.
+* 0 is considered positive.
+* Scan the array from left to right for consistency.
 
-// * If two adjacent integers have different signs, remove both.
-// * `0` is considered **positive**.
-// * Scan the array from left to right for consistency.
+Return the resulting beautiful array.
 
-// Return the resulting beautiful array.
+Example:
+Input:
+[4, 2, -2, 1]
 
-// ### Example
+Output:
+[4, 1]
 
-// ```text
-// Input:
-// [4, 2, -2, 1]
+-----------------------------------------------------------
+Approach: Stack
+-----------------------------------------------------------
+Process the array from left to right.
 
-// Output:
-// [4, 1]
-// ```
+Use a stack to store the elements that are currently part of
+the beautiful portion.
 
-// ---
+For every element:
 
-// ## Approach — Stack
+1. If the stack is empty -> push it.
+2. If stack top and current element have the same sign -> push it.
+3. If they have different signs -> pop the stack top and do NOT
+   push the current element, because both elements get removed.
 
-// We process the array from **left to right**.
+Since 0 is positive:
 
-// Use a stack to store the elements that are currently part of the beautiful portion.
+    positive -> >= 0
+    negative -> <  0
 
-// For every element:
+At the end, elements come out of the stack in reverse order,
+so reverse the answer.
 
-// 1. If the stack is empty → push it.
-// 2. If stack top and current element have the **same sign** → push it.
-// 3. If they have **different signs** → pop the stack top and **do not push the current element**, because both elements get removed.
+-----------------------------------------------------------
+Dry Run
+-----------------------------------------------------------
+Input:
+[2, 1, -4, 3, -5, 2, 6, -3]
 
-// Since `0` is positive:
+Current | Stack     | Action
+--------|-----------|---------------------------
+2       | [2]       | Push
+1       | [2,1]     | Same sign -> Push
+-4      | [2]       | Different sign -> Pop 1
+3       | [2,3]     | Same sign -> Push
+-5      | [2]       | Different sign -> Pop 3
+2       | [2,2]     | Same sign -> Push
+6       | [2,2,6]   | Same sign -> Push
+-3      | [2,2]     | Different sign -> Pop 6
 
-// ```cpp
-// positive → >= 0
-// negative → < 0
-// ```
+Final stack: [2, 2]
+Answer:     [2, 2]
 
-// At the end, elements come out of the stack in reverse order, so reverse the answer.
+-----------------------------------------------------------
+Important Point
+-----------------------------------------------------------
+When opposite signs are found we only do:
 
-// ---
+    st.pop();
 
-// ## Code
+We do NOT push the current element, because both elements
+are removed.
 
-// ```cpp
+Example:
+    Stack:   [2, 5]
+    Current: -3
+
+    5 and -3 cancel
+
+    Stack:   [2]
+
+The -3 is gone as well.
+
+-----------------------------------------------------------
+Time Complexity:
+O(n)
+Each element is pushed and popped at most once.
+
+Space Complexity:
+O(n)
+The stack can hold all n elements in the worst case.
+
+-----------------------------------------------------------
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
 class Solution {
 public:
+
     vector<int> makeBeautiful(vector<int> arr) {
 
         stack<int> st;
@@ -88,80 +139,3 @@ public:
         return ans;
     }
 };
-// ```
-
-// ---
-
-// ## Dry Run
-
-// Input:
-
-// ```text
-// [2, 1, -4, 3, -5, 2, 6, -3]
-// ```
-
-// | Current | Stack     | Action                   |
-// | ------- | --------- | ------------------------ |
-// | `2`     | `[2]`     | Push                     |
-// | `1`     | `[2,1]`   | Same sign → Push         |
-// | `-4`    | `[2]`     | Different sign → Pop `1` |
-// | `3`     | `[2,3]`   | Same sign → Push         |
-// | `-5`    | `[2]`     | Different sign → Pop `3` |
-// | `2`     | `[2,2]`   | Same sign → Push         |
-// | `6`     | `[2,2,6]` | Same sign → Push         |
-// | `-3`    | `[2,2]`   | Different sign → Pop `6` |
-
-// Final stack:
-
-// ```text
-// [2, 2]
-// ```
-
-// Answer:
-
-// ```text
-// [2, 2]
-// ```
-
-// ---
-
-// ## Time Complexity
-
-// Each element is pushed and popped at most once.
-
-// ```text
-// Time: O(n)
-// ```
-
-// ## Space Complexity
-
-// The stack can contain all `n` elements in the worst case.
-
-// ```text
-// Space: O(n)
-// ```
-
-// ## Important Point
-
-// When opposite signs are found:
-
-// ```cpp
-// st.pop();
-// ```
-
-// **Do not push the current element.**
-
-// Both elements are removed.
-
-// For example:
-
-// ```text
-// Stack:  [2, 5]
-// Current: -3
-
-// 5 and -3 cancel
-
-// Stack:  [2]
-// ```
-
-// The `-3` is also gone.

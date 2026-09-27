@@ -18,6 +18,7 @@ of parentheses that must be added to make the string valid.
 -----------------------------------------------------------
 Approach:
 1. Use a stack to store unmatched opening parentheses '('.
+   (class StackApproach)
 2. Traverse the string:
    - If the character is '(', push it into the stack.
    - If the character is ')':
@@ -52,7 +53,7 @@ O(n)
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
+class StackApproach {
 public:
 
     int minAddToMakeValid(string s) {
@@ -87,6 +88,19 @@ public:
 
 class Solution {
 public:
+
+    // Approach 2: Counter (submitted)
+    //
+    // A stack is not actually needed. We only track how many
+    // unmatched '(' we have seen so far.
+    //
+    // A ')' with left == 0 is unmatched and must be paired by
+    // inserting a '(' before it. Any '(' left at the end needs
+    // a ')' after it.
+    //
+    // Time : O(n)
+    // Space: O(1)
+
     int minAddToMakeValid(string s) {
       int count = 0;
       int left = 0;

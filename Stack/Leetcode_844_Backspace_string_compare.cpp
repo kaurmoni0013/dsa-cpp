@@ -17,7 +17,7 @@ A '#' character represents a backspace. A backspace removes
 the character immediately before it, if one exists.
 
 -----------------------------------------------------------
-APPROACH 1: Using Stack
+APPROACH 1: Using Stack  (class StackApproach)
 
 Idea:
 - Traverse each string from left to right.
@@ -49,7 +49,7 @@ O(n + m)
 -----------------------------------------------------------
 */
 
-class Solution {
+class StackApproach {
 public:
 
     bool backspaceCompare(string s, string t) {
@@ -111,7 +111,7 @@ public:
 
 /*
 ===========================================================
-APPROACH 2: Two Pointers (Optimized)
+APPROACH 2: Two Pointers (Optimized)  (class Solution - submitted)
 
 Idea:
 Instead of actually creating the resulting strings, traverse
